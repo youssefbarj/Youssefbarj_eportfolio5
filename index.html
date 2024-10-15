@@ -1,430 +1,317 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youssef Barj - Portfolio</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white font-sans">
-    <header class="py-4 px-4 sm:px-6 lg:px-8 fixed w-full z-50 transition-all duration-300" id="header">
-        <nav class="flex justify-between items-center max-w-7xl mx-auto">
-            <a href="#" class="text-3xl font-bold text-blue-400">YB</a>
-            <div class="hidden md:flex space-x-4 nav-links">
-                <button onclick="setActiveTab('about')" class="px-3 py-2 rounded-md text-sm font-medium bg-blue-600 text-white">About</button>
-                <button onclick="setActiveTab('skills')" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Skills</button>
-                <button onclick="setActiveTab('projects')" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</button>
-                <button onclick="setActiveTab('experience')" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Experience</button>
-                <button onclick="setActiveTab('contact')" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</button>
-            </div>
-            <button class="md:hidden text-white" onclick="toggleMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
+import { useState } from 'react'
+import { FileUp, Smile } from "lucide-react"
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+
+export default function Portfolio() {
+  const [activeTab, setActiveTab] = useState('about')
+
+  const skills = [
+    { name: 'Instructional Design', icon: '🎓', description: 'Expert in creating effective learning experiences' },
+    { name: 'E-Learning Development', icon: '💻', description: 'Proficient in developing interactive online courses' },
+    { name: 'LMS Administration', icon: '🖥️', description: 'Experienced in managing learning management systems' },
+    { name: 'Project Management', icon: '📊', description: 'Skilled in coordinating and overseeing e-learning projects' },
+    { name: 'Gamification', icon: '🎮', description: 'Adept at incorporating game elements in learning' },
+    { name: 'TICE & Digital Learning', icon: '📱', description: 'Knowledgeable in educational technology integration' },
+    { name: 'Articulate 360', icon: '🔧', description: 'Proficient in using Articulate 360 suite for course creation' },
+    { name: 'Adobe Creative Suite', icon: '🎨', description: 'Skilled in using Adobe tools for content creation' },
+    { name: 'Moodle & Open edX', icon: '🏫', description: 'Experienced with popular open-source LMS platforms' },
+    { name: 'Video Editing', icon: '🎬', description: 'Capable of creating and editing educational videos' },
+    { name: 'UX/UI Design', icon: '🖌️', description: 'Focused on creating user-friendly learning interfaces' },
+    { name: 'HTML, CSS, PHP', icon: '🌐', description: 'Proficient in web technologies for custom e-learning solutions' },
+  ]
+
+  const projects = [
+    {
+      title: 'Gamified Cybersecurity Training',
+      description: 'Interactive course designed to enhance cybersecurity awareness through gamification for Tesselate.',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1520078765767-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+      link: '#',
+      action: () => openModal('videoModal')
+    },
+    {
+      title: 'Privacy and Personal Data',
+      description: 'Interactive eLearning course on privacy rights and data protection in the financial industry.',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+      link: 'https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review'
+    },
+    {
+      title: 'Data Security Threats: Phishing',
+      description: 'eLearning course on recognizing and mitigating phishing attempts in email communication.',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/phishing-2-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+      link: 'https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review'
+    },
+  ]
+
+  const experiences = [
+    {
+      title: 'E-learning Project Manager and Learning Technology Expert',
+      company: 'EMERA Privée (Subsidiary of Dokeos LMS)',
+      location: 'Casablanca, Morocco',
+      period: '',
+      description: 'Managed e-learning projects, provided client support, integrated LMS with third-party systems, and implemented IT security protocols. Expertise in Dokeos LMS, project management, systems integration, and technological monitoring.',
+      details: [
+        'Provided consultancy for custom e-learning projects in various industries',
+        'Integrated Dokeos LMS with CRM and ERP systems',
+        'Developed customized LMS features',
+        'Implemented IT security protocols for the team'
+      ]
+    },
+    {
+      title: 'Freelance Instructional Designer',
+      company: 'Various Clients',
+      period: '2 years',
+      description: 'Developed interactive e-learning modules using Articulate Rise, managing client relationships, feedback incorporation, and timely delivery within budget constraints.',
+      details: [
+        'Created 30-45 minute interactive e-learning experiences',
+        'Incorporated various media types (PPT, PDF, MP4, URLs)',
+        'Managed multiple rounds of review and feedback',
+        'Published modules in web and SCORM formats'
+      ]
+    },
+    {
+      title: 'Training Manager',
+      company: 'Tesselate',
+      period: '6 months',
+      description: 'Redesigned cybersecurity training, implemented LMS, and gamified onboarding trainings.',
+      details: [
+        'Overhauled existing cybersecurity training materials',
+        'Successfully implemented a new Learning Management System',
+        'Introduced gamification elements to onboarding process',
+        'Increased employee engagement in training programs'
+      ]
+    },
+    {
+      title: 'E-Learning Designer',
+      company: 'E-Learning Solutions Inc.',
+      period: '3 months',
+      description: 'Designed and developed a complete course using Articulate Rise 360.',
+      details: [
+        'Created a comprehensive e-learning course from scratch',
+        'Utilized advanced features of Articulate Rise 360',
+        'Collaborated with subject matter experts for content accuracy',
+        'Implemented responsive design for multi-device compatibility'
+      ]
+    },
+    {
+      title: 'Instructional Designer',
+      company: 'Startup HopeZ',
+      period: '2 months',
+      description: 'Redesigned online courses and implemented gamification.',
+      details: [
+        'Revamped existing online course structure and content',
+        'Introduced gamification elements to increase user engagement',
+        'Developed achievement and reward systems',
+        'Improved course completion rates by 30%'
+      ]
+    },
+    {
+      title: 'Technopedagogy Project',
+      company: 'Bruxelles Formation',
+      period: '2 months',
+      description: 'Created a quasi-chatbot for digital pedagogy topics.',
+      details: [
+        'Designed and developed an AI-powered chatbot',
+        'Focused on digital pedagogy and educational technology topics',
+        'Implemented natural language processing for user queries',
+        'Integrated the chatbot with existing learning resources'
+      ]
+    },
+  ]
+
+  const openModal = (modalId: string) => {
+    const modal = document.getElementById(modalId)
+    if (modal) modal.classList.remove('hidden')
+  }
+
+  const closeModal = (modalId: string) => {
+    const modal = document.getElementById(modalId)
+    if (modal) modal.classList.add('hidden')
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white font-sans">
+      <header className="py-4 px-4 sm:px-6 lg:px-8 fixed w-full z-50 transition-all duration-300" id="header">
+        <nav className="flex justify-between items-center max-w-7xl mx-auto">
+          <a href="#" className="text-3xl font-bold text-blue-400">YB</a>
+          <div className="hidden md:flex space-x-4">
+            {['about', 'skills', 'projects', 'experience', 'contact'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 py-2 rounded-md text-sm font-medium ${
+                  activeTab === tab
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            ))}
+          </div>
         </nav>
-    </header>
+      </header>
 
-    <div id="mobileMenu" class="fixed inset-0 bg-gray-900 z-40 hidden md:hidden">
-        <div class="flex flex-col items-center justify-center h-full">
-            <button onclick="setActiveTab('about'); toggleMenu()" class="px-3 py-2 rounded-md text-lg font-medium mb-4 bg-blue-600 text-white">About</button>
-            <button onclick="setActiveTab('skills'); toggleMenu()" class="px-3 py-2 rounded-md text-lg font-medium mb-4 text-gray-300 hover:bg-gray-700 hover:text-white">Skills</button>
-            <button onclick="setActiveTab('projects'); toggleMenu()" class="px-3 py-2 rounded-md text-lg font-medium mb-4 text-gray-300 hover:bg-gray-700 hover:text-white">Projects</button>
-            <button onclick="setActiveTab('experience'); toggleMenu()" class="px-3 py-2 rounded-md text-lg font-medium mb-4 text-gray-300 hover:bg-gray-700 hover:text-white">Experience</button>
-            <button onclick="setActiveTab('contact'); toggleMenu()" class="px-3 py-2 rounded-md text-lg font-medium mb-4 text-gray-300 hover:bg-gray-700 hover:text-white">Contact</button>
+      <main className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+        <section id="about" className={`text-center animate-fadeInUp ${activeTab !== 'about' ? 'hidden' : ''}`}>
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1691435719454-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpeg" alt="Youssef Barj" className="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-blue-400" />
+          <h1 className="text-5xl font-bold mb-4">Youssef Barj</h1>
+          <p className="text-2xl text-blue-300 mb-8">Innovative Instructional Designer & Digital Learning Engineer</p>
+          <p className="max-w-2xl mx-auto text-gray-300 mb-12 text-lg">
+            Passionate about creating engaging and effective learning experiences. With expertise in eLearning design,
+            gamification, and LMS administration, I bring a unique blend of educational theory and technological innovation
+            to every project.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button onClick={() => openModal('cvModal')} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
+              <FileUp className="h-5 w-5 mr-2" />
+              Download CV
+            </button>
+            <a href="mailto:barjyoussef5@gmail.com" className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
+              <Smile className="h-5 w-5 mr-2" />
+              Contact Me
+            </a>
+          </div>
+        </section>
+
+        <section id="skills" className={`animate-fadeInUp ${activeTab !== 'skills' ? 'hidden' : ''}`}>
+          <h2 className="text-4xl font-bold mb-12 text-center">Skills & Expertise</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {skills.map((skill, index) => (
+              <div key={index} className="bg-gray-800 p-6 rounded-lg text-center hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 cursor-pointer">
+                <span className="text-4xl mb-4 block">{skill.icon}</span>
+                <h3 className="font-medium text-lg">{skill.name}</h3>
+                <p className="mt-2 text-sm hidden">{skill.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className={`animate-fadeInUp ${activeTab !== 'projects' ? 'hidden' : ''}`}>
+          <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div key={index} className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                <div className="p-6">
+                  <h3 className="font-bold text-xl mb-3 text-blue-300">{project.title}</h3>
+                  <p className="text-gray-400 mb-6">{project.description}</p>
+                  <button
+                    onClick={project.action || (() => window.open(project.link, '_blank'))}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors duration-300"
+                  >
+                    View Project
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" className={`animate-fadeInUp ${activeTab !== 'experience' ? 'hidden' : ''}`}>
+          <h2 className="text-4xl font-bold mb-12 text-center">Professional Experience</h2>
+          <div className="space-y-8">
+            {experiences.map((exp, index) => (
+              <div key={index} className="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <h3 className="text-2xl font-bold mb-3 text-blue-300">{exp.title}</h3>
+                <p className="text-xl text-gray-400 mb-3">{exp.company}</p>
+                <p className="text-gray-500 mb-4">{exp.period}</p>
+                <p className="text-gray-300 text-lg mb-4">{exp.description}</p>
+                <ul className="mt-4 space-y-2">
+                  {exp.details.map((detail, detailIndex) => (
+                    <li key={detailIndex} className="flex items-start">
+                      <span className="text-blue-400 mr-2">•</span>
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="contact" className={`text-center animate-fadeInUp ${activeTab !== 'contact' ? 'hidden' : ''}`}>
+          <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
+          <p className="mb-12 text-2xl text-gray-300">Ready to create innovative learning experiences? Get in touch!</p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a href="mailto:barjyoussef5@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3  px-6 rounded-full inline-flex items-center transition-colors duration-300">
+              Email Me
+            </a>
+            <a href="https://www.linkedin.com/in/youssefbarj" target="_blank" rel="noopener noreferrer" className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
+              LinkedIn
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="bg-gray-900 py-8 mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+          <p>&copy; 2023 Youssef Barj. All rights reserved.</p>
         </div>
-    </div>
+      </footer>
 
-    <main class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
-        <section id="about" class="text-center animate-fadeInUp">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1691435719454-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpeg" alt="Youssef Barj" class="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-blue-400">
-            <h1 class="text-5xl font-bold mb-4">Youssef Barj</h1>
-            <p class="text-2xl text-blue-300 mb-8">Innovative Instructional Designer & Digital Learning Engineer</p>
-            <p class="max-w-2xl mx-auto text-gray-300 mb-12 text-lg">
-                Passionate about creating engaging and effective learning experiences. With expertise in eLearning design,
-                gamification, and LMS administration, I bring a unique blend of educational theory and technological innovation
-                to every project.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="openModal('cvModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
+      <div id="cvModal" className="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="sm:flex sm:items-start">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                     Download CV
-                </button>
-                <a href="mailto:barjyoussef5@gmail.com" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
-                    Contact Me
-                </a>
-            </div>
-        </section>
-
-        <section id="skills" class="hidden animate-fadeInUp">
-            <h2 class="text-4xl font-bold mb-12 text-center">Skills & Expertise</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="skillsGrid"></div>
-        </section>
-
-        <section id="projects" class="hidden animate-fadeInUp">
-            <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid"></div>
-        </section>
-
-        <section id="experience" class="hidden animate-fadeInUp">
-            <h2 class="text-4xl font-bold mb-12 text-center">Professional Experience</h2>
-            <div class="space-y-8" id="experienceList"></div>
-        </section>
-
-        <section id="contact" class="hidden animate-fadeInUp text-center">
-            <h2 class="text-4xl font-bold mb-8">Let's Connect</h2>
-            <p class="mb-12 text-2xl text-gray-300">Ready to create innovative learning experiences? Get in touch!</p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="mailto:barjyoussef5@gmail.com" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
-                    Email Me
-                </a>
-                <a href="https://www.linkedin.com/in/youssefbarj" target="_blank" rel="noopener noreferrer" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" />
-                    </svg>
-                    LinkedIn
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-gray-900 py-8 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2023 Youssef Barj. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <div id="cvModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                Download CV
-                            </h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500">
-                                    Choose the language version of the CV you'd like to download:
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                  </h3>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Choose the language version of the CV you'd like to download:
+                    </p>
+                  </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <a href="https://drive.google.com/uc?export=download&id=1FWMS75Y-pELNno5ZQgHpuGp5bqEI_xQg" target="_blank" rel="noopener noreferrer" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        English CV
-                    </a>
-                    <a href="https://drive.google.com/uc?export=download&id=1qaSBIgME6pyWligBEzg8U_-m98rWFFI9" target="_blank" rel="noopener noreferrer" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500  sm:mt-0 sm:ml-3 sm:w-auto  sm:text-sm">
-                        French CV
-                    </a>
-                    <button type="button" onclick="closeModal('cvModal')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Cancel
-                    </button>
-                </div>
+              </div>
             </div>
+            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <a href="https://drive.google.com/uc?export=download&id=1FWMS75Y-pELNno5ZQgHpuGp5bqEI_xQg" target="_blank" rel="noopener noreferrer" className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                English CV
+              </a>
+              <a href="https://drive.google.com/uc?export=download&id=1qaSBIgME6pyWligBEzg8U_-m98rWFFI9" target="_blank" rel="noopener noreferrer" className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                French CV
+              </a>
+              <button type="button" onClick={() => closeModal('cvModal')} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div id="videoModal" className="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="sm:flex sm:items-start">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                    Gamified Cybersecurity Training
+                  </h3>
+                  <div className="mt-2">
+                    <iframe src="https://docs.google.com/presentation/d/1xpKLqrK7EueWqJWiP0SYaru4ivzMM0nyg-x2cYuzF98/embed?start=false&loop=false&delayms=3000" frameBorder="0" width="100%" height="315" allowFullScreen={true} mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <button type="button" onClick={() => closeModal('videoModal')} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div id="videoModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                Gamified Cybersecurity Training
-                            </h3>
-                            <div class="mt-2">
-                                <iframe src="https://drive.google.com/file/d/1Q7SbJmUQOwbcSozW9xoDybcP8JaN0IFi/preview" frameborder="0" width="100%" height="315" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="closeModal('videoModal')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const skills = [
-            { name: 'Instructional Design', icon: '🎓', description: 'Expert in creating effective learning experiences' },
-            { name: 'E-Learning Development', icon: '💻', description: 'Proficient in developing interactive online courses' },
-            { name: 'LMS Administration', icon: '🖥️', description: 'Experienced in managing learning management systems' },
-            { name: 'Project Management', icon: '📊', description: 'Skilled in coordinating and overseeing e-learning projects' },
-            { name: 'Gamification', icon: '🎮', description: 'Adept at incorporating game elements in learning' },
-            { name: 'TICE & Digital Learning', icon: '📱', description: 'Knowledgeable in educational technology integration' },
-            { name: 'Articulate 360', icon: '🔧', description: 'Proficient in using Articulate 360 suite for course creation' },
-            { name: 'Adobe Creative Suite', icon: '🎨', description: 'Skilled in using Adobe tools for content creation' },
-            { name: 'Moodle & Open edX', icon: '🏫', description: 'Experienced with popular open-source LMS platforms' },
-            { name: 'Video Editing', icon: '🎬', description: 'Capable of creating and editing educational videos' },
-            { name: 'UX/UI Design', icon: '🖌️', description: 'Focused on creating user-friendly learning interfaces' },
-            { name: 'HTML, CSS, PHP', icon: '🌐', description: 'Proficient in web technologies for custom e-learning solutions' },
-        ];
-
-        const projects = [
-            {
-                title: 'Gamified Cybersecurity Training',
-                description: 'Interactive course designed to enhance cybersecurity awareness through gamification for Tesselate.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1520078765767-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
-                link: '#',
-                action: () => openModal('videoModal')
-            },
-            {
-                title: 'Privacy and Personal Data',
-                description: 'Interactive eLearning course on privacy rights and data protection in the financial industry.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
-                link: 'https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review'
-            },
-            {
-                title: 'Data Security Threats: Phishing',
-                description: 'eLearning course on recognizing and mitigating phishing attempts in email communication.',
-                image:  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/phishing-2-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
-                link: 'https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review'
-            },
-        ];
-
-        const experiences = [
-            {
-                title: 'E-learning Project Manager and Learning Technology Expert',
-                company: 'EMERA Privée (Subsidiary of Dokeos LMS)',
-                location: 'Casablanca, Morocco',
-                period: '',
-                description: 'Managed e-learning projects, provided client support, integrated LMS with third-party systems, and implemented IT security protocols. Expertise in Dokeos LMS, project management, systems integration, and technological monitoring.',
-                details: [
-                    'Provided consultancy for custom e-learning projects in various industries',
-                    'Integrated Dokeos LMS with CRM and ERP systems',
-                    'Developed customized LMS features',
-                    'Implemented IT security protocols for the team'
-                ]
-            },
-            {
-                title: 'Freelance Instructional Designer',
-                company: 'Various Clients',
-                period: '2 years',
-                description: 'Developed interactive e-learning modules using Articulate Rise, managing client relationships, feedback incorporation, and timely delivery within budget constraints.',
-                details: [
-                    'Created 30-45 minute interactive e-learning experiences',
-                    'Incorporated various media types (PPT, PDF, MP4, URLs)',
-                    'Managed multiple rounds of review and feedback',
-                    'Published modules in web and SCORM formats'
-                ]
-            },
-            {
-                title: 'Training Manager',
-                company: 'Tesselate',
-                period: '6 months',
-                description: 'Redesigned cybersecurity training, implemented LMS, and gamified onboarding trainings.',
-                details: [
-                    'Overhauled existing cybersecurity training materials',
-                    'Successfully implemented a new Learning Management System',
-                    'Introduced gamification elements to onboarding process',
-                    'Increased employee engagement in training programs'
-                ]
-            },
-            {
-                title: 'E-Learning Designer',
-                company: 'E-Learning Solutions Inc.',
-                period: '3 months',
-                description: 'Designed and developed a complete course using Articulate Rise 360.',
-                details: [
-                    'Created a comprehensive e-learning course from scratch',
-                    'Utilized advanced features of Articulate Rise 360',
-                    'Collaborated with subject matter experts for content accuracy',
-                    'Implemented responsive design for multi-device compatibility'
-                ]
-            },
-            {
-                title: 'Instructional Designer',
-                company: 'Startup HopeZ',
-                period: '2 months',
-                description: 'Redesigned online courses and implemented gamification.',
-                details: [
-                    'Revamped existing online course structure and content',
-                    'Introduced gamification elements to increase user engagement',
-                    'Developed achievement and reward systems',
-                    'Improved course completion rates by 30%'
-                ]
-            },
-            {
-                title: 'Technopedagogy Project',
-                company: 'Bruxelles Formation',
-                period: '2 months',
-                description: 'Created a quasi-chatbot for digital pedagogy topics.',
-                details: [
-                    'Designed and developed an AI-powered chatbot',
-                    'Focused on digital pedagogy and educational technology topics',
-                    'Implemented natural language processing for user queries',
-                    'Integrated the chatbot with existing learning resources'
-                ]
-            },
-        ];
-
-        function setActiveTab(tabName) {
-            document.querySelectorAll('main > section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            document.getElementById(tabName).classList.remove('hidden');
-    
-            // Update the active tab in the navigation
-            document.querySelectorAll('.nav-links button, #mobileMenu button').forEach(button => {
-                if (button.textContent.toLowerCase() === tabName) {
-                    button.classList.add('bg-blue-600', 'text-white');
-                    button.classList.remove('text-gray-300', 'hover:bg-gray-700', 'hover:text-white');
-                } else {
-                    button.classList.remove('bg-blue-600', 'text-white');
-                    button.classList.add('text-gray-300', 'hover:bg-gray-700', 'hover:text-white');
-                }
-            });
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        function populateSkills() {
-            const skillsGrid = document.getElementById('skillsGrid');
-            skills.forEach(skill => {
-                const skillDiv = document.createElement('div');
-                skillDiv.className = 'bg-gray-800 p-6 rounded-lg text-center hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 cursor-pointer';
-                skillDiv.innerHTML = `
-                    <span class="text-4xl mb-4 block">${skill.icon}</span>
-                    <h3 class="font-medium text-lg">${skill.name}</h3>
-                    <p class="mt-2 text-sm hidden">${skill.description}</p>
-                `;
-                skillDiv.addEventListener('click', () => {
-                    skillDiv.querySelector('p').classList.toggle('hidden');
-                });
-                skillsGrid.appendChild(skillDiv);
-            });
-        }
-
-        function populateProjects() {
-            const projectsGrid = document.getElementById('projectsGrid');
-            projects.forEach(project => {
-                const projectDiv = document.createElement('div');
-                projectDiv.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300';
-                projectDiv.innerHTML = `
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-3 text-blue-300">${project.title}</h3>
-                        <p class="text-gray-400 mb-6">${project.description}</p>
-                        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                            </svg>
-                            View Project
-                        </button>
-                    </div>
-                `;
-                const viewButton = projectDiv.querySelector('button');
-                if (project.action) {
-                    viewButton.addEventListener('click', project.action);
-                } else {
-                    viewButton.addEventListener('click', () => window.open(project.link, '_blank'));
-                }
-                projectsGrid.appendChild(projectDiv);
-            });
-        }
-
-        function populateExperiences() {
-            const experienceList = document.getElementById('experienceList');
-            experiences.forEach((exp, index) => {
-                const expDiv = document.createElement('div');
-                expDiv.className = 'bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300';
-                expDiv.innerHTML = `
-                    <h3 class="text-2xl font-bold mb-3 text-blue-300">${exp.title}</h3>
-                    <p class="text-xl text-gray-400 mb-3">${exp.company}</p>
-                    <p class="text-gray-500 mb-4">${exp.period}</p>
-                    <p class="text-gray-300 text-lg mb-4">${exp.description}</p>
-                    <button class="text-blue-400 hover:text-blue-300 transition-colors duration-300 flex items-center">
-                        Show Details
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <ul class="mt-4 space-y-2 hidden">
-                        ${exp.details.map(detail => `
-                            <li class="flex items-start">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-1 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span>${detail}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
-                `;
-                const detailsButton = expDiv.querySelector('button');
-                const detailsList = expDiv.querySelector('ul');
-                detailsButton.addEventListener('click', () => {
-                    detailsList.classList.toggle('hidden');
-                    detailsButton.querySelector('svg').classList.toggle('rotate-90');
-                    detailsButton.textContent = detailsList.classList.contains('hidden') ? 'Show Details' : 'Hide Details';
-                    detailsButton.appendChild(detailsButton.querySelector('svg'));
-                });
-                experienceList.appendChild(expDiv);
-            });
-        }
-
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
-        }
-
-        window.addEventListener('load', () => {
-            populateSkills();
-            populateProjects();
-            populateExperiences();
-            setActiveTab('about'); // Set the initial active tab
-        });
-
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('bg-gray-900/80', 'backdrop-blur-md');
-            } else {
-                header.classList.remove('bg-gray-900/80', 'backdrop-blur-md');
-            }
-        });
-    </script>
-</body>
-</html>
+  )
+}
