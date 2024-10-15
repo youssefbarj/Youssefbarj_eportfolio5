@@ -53,7 +53,7 @@
 
     <main class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
         <section id="about" class="text-center animate-fadeInUp">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1691435719454-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpeg" alt="Youssef Barj Mug Shot" class="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-blue-400">
+            <img src="1691435719454.jpeg" alt="Youssef Barj Mug Shot" style="width:200px;height:200px;border-radius:50%" class="mx-auto mb-8 border-4 border-blue-400">
             <h1 class="text-5xl font-bold mb-4">Youssef Barj</h1>
             <p class="text-2xl text-blue-300 mb-8">Innovative Instructional Designer & Digital Learning Engineer</p>
             <p class="max-w-2xl mx-auto text-gray-300 mb-12 text-lg">
@@ -143,7 +143,7 @@
                     <a href="https://drive.google.com/uc?export=download&id=1FWMS75Y-pELNno5ZQgHpuGp5bqEI_xQg" target="_blank" rel="noopener noreferrer" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
                         English CV
                     </a>
-                    <a href="https://drive.google.com/uc?export=download&id=1qaSBIgME6pyWligBEzg8U_-m98rWFFI9" target="_blank" rel="noopener noreferrer" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <a href="https://drive.google.com/uc?export=download&id=1qaSBIgME6pyWligBEzg8U_-m98rWFFI9" target="_blank" rel="noopener noreferrer" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         French CV
                     </a>
                     <button type="button" onclick="closeModal('cvModal')" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -200,19 +200,22 @@
             {
                 title: 'Gamified Cybersecurity Training',
                 description: 'Interactive course designed to enhance cybersecurity awareness through gamification for Tesselate.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1520078765767-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: '1520078765767.jpg',
+                imageStyle: 'width:100%;height:auto',
                 action: () => openModal('videoModal')
             },
             {
                 title: 'Privacy and Personal Data',
                 description: 'Interactive eLearning course on privacy rights and data protection in the financial industry.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: 'image-3.jpg',
+                imageStyle: '',
                 link: 'https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review'
             },
             {
                 title: 'Data Security Threats: Phishing',
                 description: 'eLearning course on recognizing and mitigating phishing attempts in email communication.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/phishing-2-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: 'phishing-2.jpg',
+                imageStyle: '',
                 link: 'https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review'
             },
         ];
@@ -338,7 +341,7 @@
                 const projectDiv = document.createElement('div');
                 projectDiv.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300';
                 projectDiv.innerHTML = `
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
+                    <img src="${project.image}" alt="${project.title}" style="${project.imageStyle}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-3 text-blue-300">${project.title}</h3>
                         <p class="text-gray-400 mb-6">${project.description}</p>
@@ -380,12 +383,11 @@
                 `;
                 const detailsButton = expDiv.querySelector('button');
                 const detailsList = expDiv.querySelector('ul');
-                const buttonIcon = detailsButton.querySelector('svg');
-                detailsButton.addEventListener('click', () =>  {
+                detailsButton.addEventListener('click', () => {
                     detailsList.classList.toggle('hidden');
-                    buttonIcon.classList.toggle('rotate-90');
-                    detailsButton.innerHTML = detailsList.classList.contains('hidden') ? 'Show Details' : 'Hide Details';
-                    detailsButton.appendChild(buttonIcon);
+                    detailsButton.querySelector('svg').classList.toggle('rotate-90');
+                    detailsButton.textContent = detailsList.classList.contains('hidden') ? 'Show Details' : 'Hide Details';
+                    detailsButton.appendChild(detailsButton.querySelector('svg'));
                 });
                 experienceList.appendChild(expDiv);
             });
@@ -399,10 +401,20 @@
             document.getElementById(modalId).classList.add('hidden');
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             populateSkills();
             populateProjects();
             populateExperiences();
+            setActiveTab('about');
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-gray-900/80', 'backdrop-blur-md');
+            } else {
+                header.classList.remove('bg-gray-900/80', 'backdrop-blur-md');
+            }
         });
     </script>
 </body>
