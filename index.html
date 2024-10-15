@@ -1,271 +1,506 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Youssef Barj - Instructional Designer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        :root{--bg:#0a0a0a;--text:#fff;--accent:#00c8ff;--secondary:#ff3366}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-        .container{max-width:1200px;margin:0 auto;padding:20px;text-align:center}
-        nav{position:fixed;top:0;left:0;right:0;background:rgba(10,10,10,0.9);padding:20px 0;z-index:1000}
-        .nav-container{display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:1.5rem;font-weight:700;color:var(--accent);text-decoration:none}
-        .nav-links{display:flex;gap:20px;list-style:none}
-        .nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:1.1rem;transition:.3s}
-        .nav-links a:hover{color:var(--accent)}
-        section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 0}
-        h1,h2{font-size:2.5rem;margin-bottom:20px}
-        p{font-size:1.1rem;margin:0 auto 30px;max-width:600px}
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .btn,.project-btn{
-            display:inline-block;
-            background:var(--accent);
-            color:var(--bg);
-            padding:12px 24px;
-            text-decoration:none;
-            border-radius:30px;
-            font-weight:600;
-            transition:.3s;
-            border:2px solid var(--accent);
-            font-size:1rem;
-            cursor:pointer;
-            width: 200px;
-            text-align: center;
-        }
-        .btn:hover,.project-btn:hover{background:transparent;color:var(--accent)}
-        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;justify-items:center}
-        .grid-item,.skill-card,.project-card,.timeline-content{background:rgba(255,255,255,0.1);border-radius:15px;padding:20px;transition:.3s}
-        .grid-item:hover,.skill-card:hover,.project-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,200,255,0.2)}
-        .fas,.fab{color:var(--accent);font-size:2rem;margin-bottom:15px}
-        .skills-container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
-        .skill-card{width:150px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-        .skill-card:hover{background:var(--accent);color:var(--bg)}
-        .skill-card p{font-size:.9rem;font-weight:600;margin:0}
-        .project-card{max-width:350px}
-        .project-card img{width:100%;height:200px;object-fit:cover}
-        .project-info h3{font-size:1.3rem;margin-bottom:10px;color:var(--accent)}
-        .project-buttons{display:flex;justify-content:center;margin-top:15px}
-        .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,0.8)}
-        .modal-content{background:var(--bg);margin:15% auto;padding:20px;border:1px solid var(--accent);width:80%;max-width:700px;border-radius:10px}
-        .close{color:var(--accent);float:right;font-size:28px;font-weight:bold;cursor:pointer}
-        .close:hover{color:var(--secondary)}
-        .timeline{position:relative;max-width:1200px;margin:0 auto}
-        .timeline::after{content:'';position:absolute;width:6px;background:var(--accent);top:0;bottom:0;left:50%;margin-left:-3px}
-        .timeline-item{padding:10px 40px;position:relative;width:50%}
-        .timeline-item::after{content:'';position:absolute;width:25px;height:25px;right:-17px;background:var(--bg);border:4px solid var(--accent);top:15px;border-radius:50%;z-index:1}
-        .left{left:0}
-        .right{left:50%}
-        .left::before,.right::before{content:'';height:0;position:absolute;top:22px;width:0;z-index:1}
-        .left::before{right:30px;border:medium solid var(--accent);border-width:10px 0 10px 10px;border-color:transparent transparent transparent var(--accent)}
-        .right::before{left:30px;border:medium solid var(--accent);border-width:10px 10px 10px 0;border-color:transparent var(--accent) transparent transparent}
-        .right::after{left:-16px}
-        #cvModal .modal-content .btn {
-            display: block;
-            margin: 10px auto;
-            width: 200px;
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <div class="container nav-container">
-            <a href="#home" class="logo">YB</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    <section id="home">
-        <div class="container">
-            <img src="1691435719454.jpeg" alt="Youssef Barj Mug Shot" style="width:200px;height:200px;border-radius:50%">
-            <h1>Youssef Barj</h1>
-            <p>Innovative Instructional Designer & Digital learning Engineer</p>
-            <div class="btn-container">
-                <a href="#skills" class="btn">Explore My Skills</a>
-                <button class="btn" onclick="openModal('cvModal')">Download CV</button>
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
+import { ChevronDown, Download, ExternalLink, Linkedin, Mail, Menu, X, ChevronRight } from 'lucide-react'
+
+export default function Portfolio() {
+  const [activeTab, setActiveTab] = useState('about')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [activeSkill, setActiveSkill] = useState(null)
+  const [expandedExperience, setExpandedExperience] = useState(null)
+  const controls = useAnimation()
+  const [isInView, setIsInView] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [ref])
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible')
+    }
+  }, [controls, isInView])
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  }
+
+  const staggerChildren = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Contact']
+
+  const skills = [
+    { name: 'Instructional Design', icon: '🎓', description: 'Expert in creating effective learning experiences' },
+    { name: 'E-Learning Development', icon: '💻', description: 'Proficient in developing interactive online courses' },
+    { name: 'LMS Administration', icon: '🖥️', description: 'Experienced in managing learning management systems' },
+    { name: 'Project Management', icon: '📊', description: 'Skilled in coordinating and overseeing e-learning projects' },
+    { name: 'Gamification', icon: '🎮', description: 'Adept at incorporating game elements in learning' },
+    { name: 'TICE & Digital Learning', icon: '📱', description: 'Knowledgeable in educational technology integration' },
+    { name: 'Articulate 360', icon: '🔧', description: 'Proficient in using Articulate 360 suite for course creation' },
+    { name: 'Adobe Creative Suite', icon: '🎨', description: 'Skilled in using Adobe tools for content creation' },
+    { name: 'Moodle & Open edX', icon: '🏫', description: 'Experienced with popular open-source LMS platforms' },
+    { name: 'Video Editing', icon: '🎬', description: 'Capable of creating and editing educational videos' },
+    { name: 'UX/UI Design', icon: '🖌️', description: 'Focused on creating user-friendly learning interfaces' },
+    { name: 'HTML, CSS, PHP', icon: '🌐', description: 'Proficient in web technologies for custom e-learning solutions' },
+  ]
+
+  const experiences = [
+    {
+      title: 'E-learning Project Manager and Learning Technology Expert',
+      company: 'EMERA Privée (Subsidiary of Dokeos LMS)',
+      location: 'Casablanca, Morocco',
+      period: '',
+      description: 'Managed e-learning projects, provided client support, integrated LMS with third-party systems, and implemented IT security protocols. Expertise in Dokeos LMS, project management, systems integration, and technological monitoring.',
+      details: [
+        'Provided consultancy for custom e-learning projects in various industries',
+        'Integrated Dokeos LMS with CRM and ERP systems',
+        'Developed customized LMS features',
+        'Implemented IT security protocols for the team'
+      ]
+    },
+    {
+      title: 'Freelance Instructional Designer',
+      company: 'Various Clients',
+      period: '2 years',
+      description: 'Developed interactive e-learning modules using Articulate Rise, managing client relationships, feedback incorporation, and timely delivery within budget constraints.',
+      details: [
+        'Created 30-45 minute interactive e-learning experiences',
+        'Incorporated various media types (PPT, PDF, MP4, URLs)',
+        'Managed multiple rounds of review and feedback',
+        'Published modules in web and SCORM formats'
+      ]
+    },
+    {
+      title: 'Training Manager',
+      company: 'Tesselate',
+      period: '6 months',
+      description: 'Redesigned cybersecurity training, implemented LMS, and gamified onboarding trainings.',
+      details: [
+        'Overhauled existing cybersecurity training materials',
+        'Successfully implemented a new Learning Management System',
+        'Introduced gamification elements to onboarding process',
+        'Increased employee engagement in training programs'
+      ]
+    },
+    {
+      title: 'E-Learning Designer',
+      company: 'E-Learning Solutions Inc.',
+      period: '3 months',
+      description: 'Designed and developed a complete course using Articulate Rise 360.',
+      details: [
+        'Created a comprehensive e-learning course from scratch',
+        'Utilized advanced features of Articulate Rise 360',
+        'Collaborated with subject matter experts for content accuracy',
+        'Implemented responsive design for multi-device compatibility'
+      ]
+    },
+    {
+      title: 'Instructional Designer',
+      company: 'Startup HopeZ',
+      period: '2 months',
+      description: 'Redesigned online courses and implemented gamification.',
+      details: [
+        'Revamped existing online course structure and content',
+        'Introduced gamification elements to increase user engagement',
+        'Developed achievement and reward systems',
+        'Improved course completion rates by 30%'
+      ]
+    },
+    {
+      title: 'Technopedagogy Project',
+      company: 'Bruxelles Formation',
+      period: '2 months',
+      description: 'Created a quasi-chatbot for digital pedagogy topics.',
+      details: [
+        'Designed and developed an AI-powered chatbot',
+        'Focused on digital pedagogy and educational technology topics',
+        'Implemented natural language processing for user queries',
+        'Integrated the chatbot with existing learning resources'
+      ]
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white font-sans">
+      <header className={`py-4 px-4 sm:px-6 lg:px-8 fixed w-full z-50 transition-all duration-300 ${scrollY > 50 ? 'bg-gray-900/80 backdrop-blur-md' : ''}`}>
+        <nav className="flex justify-between items-center max-w-7xl mx-auto">
+          <motion.a 
+            href="#" 
+            className="text-3xl font-bold text-blue-400"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            YB
+          </motion.a>
+          <div className="hidden md:flex space-x-4">
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item}
+                onClick={() => setActiveTab(item.toLowerCase())}
+                className={`px-3 py-2 rounded-md text-sm font-medium ${
+                  activeTab === item.toLowerCase() ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                {item}
+              </motion.button>
+            ))}
+          </div>
+          <motion.button
+            className="md:hidden text-white"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </motion.button>
+        </nav>
+      </header>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-gray-900 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="flex flex-col items-center justify-center h-full">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item}
+                  onClick={() => {
+                    setActiveTab(item.toLowerCase())
+                    setIsMenuOpen(false)
+                  }}
+                  className={`px-3 py-2 rounded-md text-lg font-medium mb-4 ${
+                    activeTab === item.toLowerCase() ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  {item}
+                </motion.button>
+              ))}
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <main className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+        <AnimatePresence mode="wait">
+          {activeTab === 'about' && (
+            <motion.section
+              key="about"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={fadeInUp}
+              className="text-center"
+            >
+              <motion.img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1691435719454-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpeg"
+                alt="Youssef Barj"
+                className="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-blue-400"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              />
+              <motion.h1 
+                className="text-5xl font-bold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Youssef Barj
+              </motion.h1>
+              <motion.p 
+                className="text-2xl text-blue-300 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Innovative Instructional Designer & Digital Learning Engineer
+              </motion.p>
+              <motion.p 
+                className="max-w-2xl mx-auto text-gray-300 mb-12 text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Passionate about creating engaging and effective learning experiences. With expertise in eLearning design,
+                gamification, and LMS administration, I bring a unique blend of educational theory and technological innovation
+                to every project.
+              </motion.p>
+              <motion.div 
+                className="flex flex-wrap justify-center gap-4"
+                variants={staggerChildren}
+              >
+                <motion.a
+                  href="#"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300"
+                  variants={fadeInUp}
+                >
+                  <Download className="mr-2" />
+                  Download CV
+                </motion.a>
+                <motion.a
+                  href="#contact"
+                  className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300"
+                  variants={fadeInUp}
+                >
+                  <Mail className="mr-2" />
+                  Contact Me
+                </motion.a>
+              </motion.div>
+            </motion.section>
+          )}
+
+          {activeTab === 'skills' && (
+            <motion.section
+              key="skills"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={fadeInUp}
+            >
+              <h2 className="text-4xl font-bold mb-12 text-center">Skills & Expertise</h2>
+              <motion.div 
+                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                variants={staggerChildren}
+              >
+                {skills.map((skill) => (
+                  <motion.div
+                    key={skill.name}
+                    className={`bg-gray-800 p-6 rounded-lg text-center hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 cursor-pointer ${activeSkill === skill.name ? 'bg-blue-700' : ''}`}
+                    variants={fadeInUp}
+                    onClick={() => setActiveSkill(activeSkill === skill.name ? null : skill.name)}
+                  >
+                    <span className="text-4xl mb-4 block">{skill.icon}</span>
+                    <h3 className="font-medium text-lg">{skill.name}</h3>
+                    <AnimatePresence>
+                      {activeSkill === skill.name && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-2 text-sm"
+                        >
+                          {skill.description}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.section>
+          )}
+
+          {activeTab ===   'projects' && (
+            <motion.section
+              key="projects"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={fadeInUp}
+            >
+              <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+              <motion.div 
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                variants={staggerChildren}
+              >
+                {[
+                  {
+                    title: 'Gamified Cybersecurity Training',
+                    description: 'Interactive course designed to enhance cybersecurity awareness through gamification for Tesselate.',
+                    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1520078765767-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                    link: '#'
+                  },
+                  {
+                    title: 'Privacy and Personal Data',
+                    description: 'Interactive eLearning course on privacy rights and data protection in the financial industry.',
+                    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                    link: 'https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review'
+                  },
+                  {
+                    title: 'Data Security Threats: Phishing',
+                    description: 'eLearning course on recognizing and mitigating phishing attempts in email communication.',
+                    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/phishing-2-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                    link: 'https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review'
+                  },
+                ].map((project) => (
+                  <motion.div
+                    key={project.title}
+                    className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300"
+                    variants={fadeInUp}
+                  >
+                    <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl mb-3 text-blue-300">{project.title}</h3>
+                      <p className="text-gray-400 mb-6">{project.description}</p>
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-flex items-center transition-colors duration-300"
+                      >
+                        <ExternalLink className="mr-2" />
+                        View Project
+                      </a>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.section>
+          )}
+
+          {activeTab === 'experience' && (
+            <motion.section
+              key="experience"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={fadeInUp}
+            >
+              <h2 className="text-4xl font-bold mb-12 text-center">Professional Experience</h2>
+              <motion.div 
+                className="space-y-8"
+                variants={staggerChildren}
+              >
+                {experiences.map((exp, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-gray-800 p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                    variants={fadeInUp}
+                  >
+                    <h3 className="text-2xl font-bold mb-3 text-blue-300">{exp.title}</h3>
+                    <p className="text-xl text-gray-400 mb-3">{exp.company}</p>
+                    <p className="text-gray-500 mb-4">{exp.period}</p>
+                    <p className="text-gray-300 text-lg mb-4">{exp.description}</p>
+                    <button
+                      onClick={() => setExpandedExperience(expandedExperience === index ? null : index)}
+                      className="text-blue-400 hover:text-blue-300 transition-colors duration-300 flex items-center"
+                    >
+                      {expandedExperience === index ? 'Hide Details' : 'Show Details'}
+                      <ChevronRight className={`ml-2 transform transition-transform duration-300 ${expandedExperience === index ? 'rotate-90' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {expandedExperience === index && (
+                        <motion.ul
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-4 space-y-2"
+                        >
+                          {exp.details.map((detail, i) => (
+                            <motion.li
+                              key={i}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.1 }}
+                              className="flex items-start"
+                            >
+                              <ChevronRight className="mr-2 mt-1 text-blue-400" />
+                              <span>{detail}</span>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.section>
+          )}
+
+          {activeTab === 'contact' && (
+            <motion.section
+              key="contact"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={fadeInUp}
+              className="text-center"
+            >
+              <h2 className="text-4xl font-bold mb-8">Let's Connect</h2>
+              <motion.p 
+                className="mb-12 text-2xl text-gray-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Ready to create innovative learning experiences? Get in touch!
+              </motion.p>
+              <motion.div 
+                className="flex flex-wrap justify-center gap-6"
+                variants={staggerChildren}
+              >
+                <motion.a
+                  href="mailto:barjyoussef5@gmail.com"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300"
+                  variants={fadeInUp}
+                >
+                  <Mail className="mr-2" />
+                  Email Me
+                </motion.a>
+                <motion.a
+                  href="https://www.linkedin.com/in/youssefbarj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-colors duration-300"
+                  variants={fadeInUp}
+                >
+                  <Linkedin className="mr-2" />
+                  LinkedIn
+                </motion.a>
+              </motion.div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+      </main>
+
+      <footer className="bg-gray-900 py-8 mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+          <p>&copy; 2023 Youssef Barj. All rights reserved.</p>
         </div>
-    </section>
-    <section id="services">
-        <div class="container">
-            <h2>Services</h2>
-            <div class="grid">
-                <div class="grid-item">
-                    <i class="fas fa-chess-rook"></i>
-                    <h3>Learning Strategy</h3>
-                    <p>Well-thought-out design process to achieve your learning goals.</p>
-                </div>
-                <div class="grid-item">
-                    <i class="fas fa-pencil-ruler"></i>
-                    <h3>eLearning Design</h3>
-                    <p>Conceptualising engaging learning experiences.</p>
-                </div>
-                <div class="grid-item">
-                    <i class="fas fa-desktop"></i>
-                    <h3>Development</h3>
-                    <p>Creating solutions in various formats, from SCORM modules to websites.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="skills">
-        <div class="container">
-            <h2>Skills & Expertise</h2>
-            <div class="skills-container">
-                <div class="skill-card"><i class="fas fa-chalkboard-teacher"></i><p>Instructional Design</p></div>
-                <div class="skill-card"><i class="fas fa-laptop-code"></i><p>E-Learning Development</p></div>
-                <div class="skill-card"><i class="fas fa-server"></i><p>LMS Administration</p></div>
-                <div class="skill-card"><i class="fas fa-tasks"></i><p>Project Management</p></div>
-                <div class="skill-card"><i class="fas fa-gamepad"></i><p>Gamification</p></div>
-                <div class="skill-card"><i class="fas fa-digital-tachograph"></i><p>TICE & Digital Learning</p></div>
-                <div class="skill-card"><i class="fas fa-pencil-ruler"></i><p>Articulate 360</p></div>
-                <div class="skill-card"><i class="fas fa-photo-video"></i><p>Adobe Creative Suite</p></div>
-                <div class="skill-card"><i class="fas fa-graduation-cap"></i><p>Moodle & Open edX</p></div>
-                <div class="skill-card"><i class="fas fa-film"></i><p>Video Editing</p></div>
-                <div class="skill-card"><i class="fas fa-paint-brush"></i><p>UX/UI Design</p></div>
-                <div class="skill-card"><i class="fas fa-code"></i><p>HTML, CSS, PHP</p></div>
-            </div>
-        </div>
-    </section>
-    <section id="projects">
-        <div class="container">
-            <h2>Recent projects</h2>
-            <div class="grid">
-                <div class="project-card">
-                    <img src="1520078765767.jpg" alt="Gamified Cybersecurity Training" style="width:100%;height:auto">
-                    <div class="project-info">
-                        <h3>Gamified Cybersecurity Training for Tesselate</h3>
-                        <p>An interactive course designed to enhance cybersecurity awareness through gamification.</p>
-                        <div class="project-buttons">
-                            <button class="project-btn" onclick="openModal('phishingVideoModal')">Preview</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="image-3.jpg" alt="Privacy and Personal Data Course">
-                    <div class="project-info">
-                        <h3>Privacy and Personal Data</h3>
-                        <p>An interactive eLearning course on privacy rights and data protection in the financial industry.</p>
-                        <div class="project-buttons">
-                            <a href="https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review" class="project-btn" target="_blank" rel="noopener noreferrer">Preview</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="phishing-2.jpg" alt="Data Security Threats: Phishing">
-                    <div class="project-info">
-                        <h3>Data Security Threats: Phishing</h3>
-                        <p>An interactive eLearning course on recognizing and mitigating phishing attempts in email communication.</p>
-                        <div class="project-buttons">
-                            <a href="https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review" class="project-btn" target="_blank" rel="noopener noreferrer">Preview</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Master in Education & Training Engineering and Techniques (ITEF)</h3>
-                        <p>Faculté des Sciences Ben M'Sik, Casablanca (2023-2024)</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Bachelor's Degree in Education</h3>
-                        <p>École Normale Supérieure de Casablanca (2020 - 2023)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="experience">
-        <div class="container">
-            <h2>Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Training Manager - Tesselate</h3>
-                        <p>Redesigned cybersecurity training, implemented LMS, and gamified onboarding trainings (6 months)</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>E-Learning Designer - E-Learning Solutions Inc.</h3>
-                        <p>Designed and developed a complete course using Articulate Rise 360 (3 months)</p>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Instructional Designer - Startup HopeZ</h3>
-                        <p>Redesigned online courses and implemented gamification (2 months)</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Technopedagogy Project - Bruxelles Formation</h3>
-                        <p>Created a quasi-chatbot for digital pedagogy topics (2 months)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer id="contact">
-        <div class="container">
-            <h2>Let's Connect</h2>
-            <p>Ready to create innovative learning experiences? Get in touch!</p>
-            <a href="mailto:barjyoussef5@gmail.com" class="btn">Contact Me</a>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/youssefbarj" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-    <div id="phishingVideoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('phishingVideoModal')">&times;</span>
-            <iframe width="100%" height="315" src="https://drive.google.com/file/d/1uF6D996ueL2uE0bdVBrZyJILJ6Aj8q8-/preview" frameborder="0" allowfullscreen></iframe>
-        </div>
+      </footer>
     </div>
-    <div id="cvModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('cvModal')">&times;</span>
-            <h3>Download CV</h3>
-            <a href="https://drive.google.com/uc?export=download&id=1FWMS75Y-pELNno5ZQgHpuGp5bqEI_xQg" class="btn" target="_blank" rel="noopener noreferrer">English CV</a>
-            <a href="https://drive.google.com/uc?export=download&id=1qaSBIgME6pyWligBEzg8U_-m98rWFFI9" class="btn" target="_blank" rel="noopener noreferrer">CV en Français</a>
-        </div>
-    </div>
-    <script>
-        function openModal(m) {
-            document.getElementById(m).style.display = "block";
-        }
-        function closeModal(m) {
-            document.getElementById(m).style.display = "none";
-        }
-        window.onclick = function(e) {
-            if (e.target.className === "modal") {
-                e.target.style.display = "none";
-            }
-        }
-    </script>
-</body>
-</html>
+  )
+}
