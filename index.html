@@ -200,19 +200,22 @@
             {
                 title: 'Gamified Cybersecurity Training',
                 description: 'Interactive course designed to enhance cybersecurity awareness through gamification for Tesselate.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1520078765767-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: '1520078765767.jpg',
+                imageStyle: 'width:100%;height:auto',
                 action: () => openModal('videoModal')
             },
             {
                 title: 'Privacy and Personal Data',
                 description: 'Interactive eLearning course on privacy rights and data protection in the financial industry.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: 'image-3.jpg',
+                imageStyle: '',
                 link: 'https://360.articulate.com/review/content/2dd43c56-b591-4ca0-a4a3-562102b4ebaa/review'
             },
             {
                 title: 'Data Security Threats: Phishing',
                 description: 'eLearning course on recognizing and mitigating phishing attempts in email communication.',
-                image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/phishing-2-0cueSx5nLXL7zIjSLVprZCRVtJl6Hb.jpg',
+                image: 'phishing-2.jpg',
+                imageStyle: '',
                 link: 'https://360.articulate.com/review/content/aad4cbee-a70f-4cab-bd56-c2ecafeaf98b/review'
             },
         ];
@@ -338,7 +341,7 @@
                 const projectDiv = document.createElement('div');
                 projectDiv.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300';
                 projectDiv.innerHTML = `
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
+                    <img src="${project.image}" alt="${project.title}" style="${project.imageStyle}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="font-bold text-xl mb-3 text-blue-300">${project.title}</h3>
                         <p class="text-gray-400 mb-6">${project.description}</p>
